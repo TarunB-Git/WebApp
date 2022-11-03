@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+<html>
+ <head class="custom-theme bg-dark">
+
+ {% block head %}
+ <title>DaBlog</title>
+ {% endblock %}
+ </head>
+ <body class="custom-theme bg-dark">
+  {% block body %}
+  <br>
+  <div class= "custom-theme bg-dark">
+  <h1 style="display:inline">All Posts:</h1>
+  <a style="display:inline" class = "btn btn-success float-end" href="/create">+ Add Post</a>
+  </div>
+    <hr>
+
+    {% for post in posts %}
+        <br>
+        <h2>{{ post.title }}</h2>
+
+        {% if post.author %}
+            <h6>By: {{ post.author }}
+            <br>
+            On: {{ post.date_posted }}</h6>
+        {% else %}
+            <h6>By: Anonymous
+            <br>
+            On: {{ post.date_posted }}</h6>
+        {% endif %}
+        <br>
+        <p style = "white-space:pre-wrap">{{ post.content }}</p>
+
+        <a class = "btn btn-outline-primary" href="/blog/edit/{{post.id}}">Edit</a>
+        <a class = "btn btn-outline-danger" href="/blog/delete/{{post.id}}">Delete</a>
+        <button type="button" class="btn btn-secondary" disabled>Report</button>
+
+        <hr>
+    {% endfor%}
+
+  {% endblock %}
+ </body>
+</html>

@@ -1,0 +1,28 @@
+{% extends 'dash.html' %}
+<html>
+{% block head %}
+<head>
+            <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<script>
+    function myFunction2() {
+            //document.getElementById(id).className = cName;
+
+            document.getElementById('collapse1').setAttribute( "class", "collapse show nav flex-column ms-1");
+
+        }
+</script>
+ <title>Analytics</title>
+</head>
+ {% endblock %}
+
+ {% block body %}
+    <form action = "/success" method="POST" enctype = "multipart/form-data">
+
+         <div class="mb-3">
+            <input type="file" name="file" />
+         </div>
+         <input type="submit" value="Submit">
+    </form>
+
+  {% endblock %}
+</html>

@@ -1,0 +1,13 @@
+{% extends 'dash.html' %}
+
+{% block head %}
+<title> Upload </title>
+{% endblock %}
+
+
+{% block body %}
+ <p>File uploaded successfully</p>
+ <p>File Name: {{name}}</p>
+ <a class = "btn btn-outline-primary" href="{{imf}}">See Graph</a>
+ <img src=" {{imf}}">
+{% endblock %}

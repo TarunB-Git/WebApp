@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" class="custom-theme bg-dark">
+<head class= "custom-theme bg-dark">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      {% block head %} {% endblock %}
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dark-mode.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.7/lib/darkmode-js.min.js"></script>
+    <script>
+      function addDarkmodeWidget() {
+        new Darkmode().showWidget();
+      }
+      window.addEventListener('load', addDarkmodeWidget);
+    </script>
+
+</head>
+
+<body class="custom-theme bg-dark">
+
+    <div class="custom-theme bg-dark">
+          <nav class="navbar navbar-dark bg-dark" aria-label="First navbar example">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/temp">Nilores</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarsExample01">
+                <ul class="navbar-nav me-auto mb-2">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="/profile">Profile</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link active" href="/blog">Blog</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Upcoming Projects</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="/proj">Project 1</a></li>
+                      <li><a class="dropdown-item" href="/home">Project 2</a></li>
+                    </ul>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Contact the TEAM</a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="https://img.ifunny.co/videos/1072f8c2947abcfdcb18c4ceb1ef42df638ec61e3cce546e675c9f2c2227e6e6_1.mp4">fool</a></li>
+                      <li><a class="dropdown-item" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">i predicted</a></li>
+                      <li><a class="dropdown-item" href="https://www.youtube.com/watch?v=mJbArV81Fmg">this</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                <form role="search">
+                  <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                </form>
+              </div>
+            </div>
+          </nav>
+          <div class="d-flex custom-theme bg-dark">
+            <div class="form-check form-switch ms-auto mt-3 me-3">
+              <label class="form-check-label ms-3" for="lightSwitch">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="25"
+                  height="25"
+                  fill="currentColor"
+                  class="bi bi-brightness-high"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    d="M8 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6zm0 1a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
+                  />
+                </svg>
+              </label>
+              <input class="form-check-input" type="checkbox" id="lightSwitch" />
+            </div>
+          </div>
+        <div class="flex-wrapper">
+            <div class="container custom-theme bg-dark">
+
+               {% block body %}
+
+               {% endblock %}
+
+            </div>
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+
+           <div class="container custom-theme bg-dark">
+             <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top footer-down">
+               <p class="col-md-4 mb-0 text-muted">&copy; 2022 Company, Inc.All rights reserved.</p>
+
+
+                 <img src= "/static/templates/Images/Ebil_Nilores.png" alt="Img" width="50" height="50" class="custom-theme bg-dark post">
+
+
+               <ul class="nav col-md-4 justify-content-end">
+                 <li class="nav-item"><a href="/" class="nav-link px-2 text-muted">Home</a></li>
+                 <li class="nav-item"><a href="/blog" class="nav-link px-2 text-muted">Blog</a></li>
+                 <li class="nav-item"><a href="/post" class="nav-link px-2 text-muted">Gallery</a></li>
+                 <li class="nav-item"><a href="/tandc" class="nav-link px-2 text-muted">T&C</a></li>
+                 <li class="nav-item"><a href="/about" class="nav-link px-2 text-muted">About</a></li>
+               </ul>
+              </footer>
+           </div>
+    </div>
+    </div>
+    <script src="{{url_for('static', filename='switch.js')}}"></script>
+
+</body>
+</html>

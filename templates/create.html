@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<br>
+<title>Create Post</title>
+{% endblock %}
+
+{% block body %}
+<br>
+    <hr>
+    <h2>Create New Blog Post:</h2>
+    <br>
+    <form action="/create" method="POST" >
+
+         <div class="input-group mb-3">
+           <span class="input-group-text" id="inputGroup-sizing-default">Title: </span>
+           <input class="form-control" type="text" name="title" id="title" placeholder="Enter Subject" aria-label="Enter Subject" required>
+         </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-default">Author: </span>
+          <input class="form-control" type="text" name="author" id="author" placeholder="Enter Name" aria-label="Enter Name" >
+        </div>
+
+        <div class="input-group mb-3">
+          <span class="input-group-text" id="inputGroup-sizing-default">Post: </span>
+          <textarea class="form-control" name="content" id="content" aria-label="Enter Content" rows="3" required></textarea>
+        </div>
+
+        <div class="col-12">
+          <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+              <label class="form-check-label" for="invalidCheck2">
+                 Agree to terms and conditions
+              </label>
+         </div>
+        </div>
+
+        <input type="submit" value="Post">
+    </form>
+{% endblock %}

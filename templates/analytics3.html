@@ -1,0 +1,31 @@
+{% extends 'dash.html' %}
+<html>
+{% block head %}
+<head>
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+ <title>Analytics</title>
+ <script>
+    function myFunction3() {
+            //document.getElementById(id).className = cName;
+
+            document.getElementById('collapse1').setAttribute( "class", "collapse show nav flex-column ms-1");
+
+        }
+</script>
+</head>
+ {% endblock %}
+
+ {% block body %}
+<body onload="myFunction3()">
+    <br>
+    <h1>Analytics3:</h1>
+     <br>
+    <img src="/analytics3.png"
+         alt="random points as png"
+
+    >
+
+</body>
+
+  {% endblock %}
+</html>

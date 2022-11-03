@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title> Gallery </title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+<style>
+.content {
+  max-width: 500px;
+  margin: auto;
+}
+div.content {
+  text-align: center;
+}
+
+</style>
+{% endblock %}
+
+
+{% block body %}
+
+<div class="content">
+    <h3>DA GALLERY</h3>
+
+    <h5>Post your photos here:</h5>
+    <hr>
+<div class="container">
+     <form action = "/upload" method="POST" enctype = "multipart/form-data">
+
+         <div class="mb-3">
+            <input type="file" name="files[]" multiple="true" autocomplete="off" required />
+         </div>
+         <input type="submit" value="Submit">
+    </form>
+    <hr>
+ <div class="overflow-hidden">
+  <div class="container ">
+    <div class="images-section">
+      {% for image in images %}
+        <a href="{{ url_for('serve_image', filename=image) }}" target="_blank">
+          <img src="{{ url_for('serve_image', filename=image) }}"/>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+ </div>
+</div>
+</div>
+
+
+{% endblock %}
