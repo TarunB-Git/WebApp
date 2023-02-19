@@ -2,17 +2,8 @@
 
 {% block head %}
 <title> Gallery </title>
-<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-<style>
-.content {
-  max-width: 500px;
-  margin: auto;
-}
-div.content {
-  text-align: center;
-}
 
-</style>
+
 {% endblock %}
 
 
@@ -31,9 +22,7 @@ div.content {
          </div>
          <input type="submit" value="Submit">
     </form>
-    <hr>
- <div class="overflow-hidden">
-  <div class="container ">
+
     <div class="images-section">
       {% for image in images %}
         <a href="{{ url_for('serve_image', filename=image) }}" target="_blank">
@@ -43,8 +32,7 @@ div.content {
     </div>
   </div>
  </div>
-</div>
-</div>
+
 
 
 {% endblock %}

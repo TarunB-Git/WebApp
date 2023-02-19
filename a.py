@@ -25,11 +25,13 @@ app.secret_key = "iammagic"
 login_manager = LoginManager()
 login_manager.init_app(app)
 
-class User(UserMixin):
+class User(UserMixin, db.Model):
 
-    def __init__(self, username, password_hash):
-        self.username = username
-        self.password_hash = password_hash
+    __tablename__ = "users"
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(128))
+    password_hash = db.Column(db.String(128))
 
 
     def check_password(self, password):
@@ -39,16 +41,9 @@ class User(UserMixin):
     def get_id(self):
         return self.username
 
-all_users = {
-    "admin": User("admin", generate_password_hash("secret")),
-    "bob": User("bob", generate_password_hash("less-secret")),
-    "caroline": User("caroline", generate_password_hash("completely-secret")),
-}
-
-
 @login_manager.user_loader
 def load_user(user_id):
-    return all_users.get(user_id)
+    return User.query.filter_by(username=user_id).first()
 
 
 class Comment(db.Model):
@@ -58,13 +53,49 @@ class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(4096))
     posted = db.Column(db.DateTime, default=datetime.now)
+    commenter_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
+    commenter = db.relationship('User', foreign_keys=commenter_id)
+
+class Rules(db.Model):
+
+    __tablename__ = "rules"
+
+    id = db.Column(db.Integer, primary_key=True)
+    rule_desc = db.Column(db.String(4096))
+
+class Transacs(db.Model):
+    __tablename__ = "transacs"
+
+    id = db.Column(db.Integer, primary_key=True)
+    value = db.Column(db.Integer)
+
+class Accounts(db.Model):
+
+    __tablename__ = "accs"
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    acc_no = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(4096))
+    dob = db.Column(db.DateTime)
+    address = db.Column(db.String(4096))
+
+class Issues(db.Model):
+
+    __tablename__ = "tasks"
+
+    id = db.Column(db.Integer, primary_key=True)
+    issue_id = db.Column(db.Integer, primary_key=True)
+    transacid = db.Column(db.Integer, db.ForeignKey('transacs.id'), nullable=True)
+    ruleid = db.Column(db.Integer, db.ForeignKey('rules.id'), nullable=True)
+    rule = db.relationship('Rules', foreign_keys=ruleid)
+    transac = db.relationship('Transacs', foreign_keys=transacid)
 
 @app.route("/", methods=["GET", "POST"])
 def index():
     if request.method == "GET":
         return render_template("main_page.html", comments=Comment.query.all())
 
-    comment = Comment(content=request.form["contents"])
+    comment = Comment(content=request.form["contents"], commenter=current_user)
+
     if not current_user.is_authenticated:
         return redirect(url_for('index'))
     db.session.add(comment)
@@ -78,10 +109,9 @@ def login():
     if request.method == "GET":
         return render_template("login_page.html", error=False)
 
-    username = request.form["username"]
-    if username not in all_users:
+    user = load_user(request.form["username"])
+    if user is None:
         return render_template("login_page.html", error=True)
-    user = all_users[username]
 
     if not user.check_password(request.form["password"]):
         return render_template("login_page.html", error=True)
